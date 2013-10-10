@@ -67,6 +67,9 @@ github_repo_count: 0
 github_show_profile_link: true
 github_skip_forks: true
 
+# weibo
+weibo_share: true
+
 # Google +1
 google_plus_one: false
 google_plus_one_size: medium
@@ -85,11 +88,11 @@ delicious_user:
 delicious_count: 3
 
 # Disqus Comments
-disqus_short_name:
-disqus_show_comment_count: false
+disqus_short_name: coffeexu
+disqus_show_comment_count: true
 
 # Google Analytics
-google_analytics_tracking_id:
+google_analytics_tracking_id: coffeexu
 
 # Facebook Like
 facebook_like: false
