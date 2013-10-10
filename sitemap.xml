@@ -2,18 +2,22 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://CoffeeXu.github.io/blog/2013/10/10/hello-again-octopress/</loc>
-        <lastmod>2013-10-10T20:51:15+08:00</lastmod>
+        <lastmod>2013-10-10T20:55:30+08:00</lastmod>
     </url>
     <url>
         <loc>http://CoffeeXu.github.io/blog/archives/</loc>
-        <lastmod>2013-10-10T20:51:15+08:00</lastmod>
+        <lastmod>2013-10-10T20:55:30+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://CoffeeXu.github.io/blog/</loc>
+        <lastmod>2013-10-10T20:55:30+08:00</lastmod>
     </url>
     <url>
         <loc>http://CoffeeXu.github.io/</loc>
-        <lastmod>2013-10-10T20:51:15+08:00</lastmod>
+        <lastmod>2013-10-10T21:13:32+08:00</lastmod>
     </url>
     <url>
         <loc>http://CoffeeXu.github.io/robots.txt</loc>
-        <lastmod>2013-10-10T20:39:53+08:00</lastmod>
+        <lastmod>2013-10-10T20:55:30+08:00</lastmod>
     </url>
 </urlset>
