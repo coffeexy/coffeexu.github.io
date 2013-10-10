@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[所以。]]></title>
-  <link href="http://CoffeeXu.github.io/atom.xml" rel="self"/>
+  <title><![CDATA[Category: 折腾 | 所以。]]></title>
+  <link href="http://CoffeeXu.github.io/blog/categories/zhe-teng/atom.xml" rel="self"/>
   <link href="http://CoffeeXu.github.io/"/>
   <updated>2013-10-10T20:51:36+08:00</updated>
   <id>http://CoffeeXu.github.io/</id>
