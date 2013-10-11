@@ -77,6 +77,7 @@ figure.code{
 	margin-top: 3px;
     margin-bottom: 1.5em;
 	padding: 5px 15px;
+	font-family: $font-mono;
 	@include border-radius(5px);
 	figcaption{
 		font-size: 0.9em;
