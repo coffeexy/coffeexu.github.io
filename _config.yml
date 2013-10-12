@@ -96,7 +96,7 @@ duoshuo_short_name: coffeexu
 weibo_share: true
 
 # Google Analytics
-google_analytics_tracking_id: coffeexu
+# google_analytics_tracking_id: coffeexu
 
 # Facebook Like
 facebook_like: false
