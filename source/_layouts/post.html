@@ -7,16 +7,16 @@ single: true
 {% unless page.sharing == false %}
 	{% include post/sharing.html %}
 {% endunless %}
-{% if site.disqus_short_name and site.disqus_show_comment_count == true and page.comments == true %}
+{% if site.disqus_short_name and site.duoshuo_comments == false and page.comments == true %}
 <section id="comment">
     <h2 class="title">Comments</h2>
     <div id="disqus_thread" aria-live="polite">{% include post/disqus_thread.html %}</div>
 </section>
 {% endif %}
 
-{% if site.duoshuo_short_name and site.duoshuo_comments == true and page.comments == true %｝
+{% if site.duoshuo_short_name and site.duoshuo_comments == true and page.comments == true %}
   <section>
-    <h2>Comments</h2>
-    <div id="comments" aria-live="polite">｛% include post/duoshuo.html %｝</div>
+    <h1>Comments</h1>
+    <div id="comments" aria-live="polite">{% include post/duoshuo.html %}</div>
   </section>
-｛% endif %｝
+{% endif %}

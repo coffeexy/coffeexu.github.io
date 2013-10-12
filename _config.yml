@@ -4,7 +4,7 @@
 
 url: http://CoffeeXu.github.io
 title: 所以。
-author: 许乐乐
+author: 许嘘嘘
 simple_search: http://google.com/search
 description:
 
@@ -86,7 +86,7 @@ delicious_count: 3
 
 # Disqus Comments
 disqus_short_name: coffeexu
-disqus_show_comment_count: false
+disqus_show_comment_count: true
 
 # duoshuo comments
 duoshuo_comments: true
