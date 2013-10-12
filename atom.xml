@@ -4,13 +4,26 @@
   <title><![CDATA[所以。]]></title>
   <link href="http://CoffeeXu.github.io/atom.xml" rel="self"/>
   <link href="http://CoffeeXu.github.io/"/>
-  <updated>2013-10-12T20:07:06+08:00</updated>
+  <updated>2013-10-12T22:15:52+08:00</updated>
   <id>http://CoffeeXu.github.io/</id>
   <author>
     <name><![CDATA[许嘘嘘]]></name>
     
   </author>
 
+  
+  <entry>
+    <title type="html"><![CDATA[好像没有然后了]]></title>
+    <link href="http://CoffeeXu.github.io/blog/2013/10/12/no-longer/"/>
+    <updated>2013-10-12T21:51:00+08:00</updated>
+    <id>http://CoffeeXu.github.io/blog/2013/10/12/no-longer</id>
+    <content type="html"><![CDATA[<p>到目前，处理完字体，样式，分享，评论，百度统计，感觉又没有那么又激情了。感觉没有事情可做。</p>
+
+<p>所以又是三分钟热度吗？</p>
+
+<p>本来为了走向国际，或者学英语之类的，应该来个全英文的博客网站，至少导航和分类应该要国际化。但是，还是觉得文字对我有更多的吸引力。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Hello Again!Octopress]]></title>
