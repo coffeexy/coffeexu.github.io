@@ -3,9 +3,10 @@ layout: post
 title: "Hello Again!Octopress"
 date: 2013-10-10 20:45
 comments: true
-categories: 折腾
+categories: 哈喽！女汉纸
 ---
-
+tags: `折腾` `octopress`
+<br>
 这是第一次在mac上折腾Octopress, 对于我这种数码/IT杀手来说， 跟win一样麻烦。
 
 但成就感暴涨。尤其是[茂茂](http://summer222522.github.io/)赞助了各种美好的[主题](https://github.com/imathis/octopress)后，更加激动兴奋了！！
@@ -72,8 +73,8 @@ categories: 折腾
 * 超链接。有没有发现我文章内的连接是打开新窗口的呢，markdown目前应该还不支持这种语法的，当然markdown是支持html。来自己动动手操作下。[戳](https://gist.github.com/azone/4523641)
 * 目前的主题，自然是自己做过修改啦！自己动手，丰衣足食。哈哈。设置css样式基本在`sass/parts`目录下
 * 文本上下间距。嫌弃默认的间距实在是太大了，改了下。文件同上
-* 本来添加了加网和友言的评论，觉得太山寨了，档次一下就low了，删掉了。
-* 啊喂喂喂，我的导航可不是`在这里温吞`！`在`是我的网名好嘛。`温吞`表示了该栏目往往是我三分钟热度写的代码。`这里`就是这里咯。
+* 本来添加了加网和友言的评论，觉得太山寨了，档次一下就low了，删掉了。目前使用的addthis的分享和多说的评论。addthis不能分享到微信，缺陷。所以可能还是尽量使用国内的玩意儿更加符合国情吧。
+* tips.可以的话还是尽量看官方文档。当然最方便的就是——不要搞了啊！！！
 
 
 
