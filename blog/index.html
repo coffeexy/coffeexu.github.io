@@ -7,7 +7,17 @@
 
 	<meta name="author" content="许嘘嘘">
 
-<meta name="description" content="JavaScript被描述为一个面向函数语言（有别于面向对象的语言）。因为函数在JavaScript中不仅仅是独立的逻辑执行单元，函数是一等公民，它也提供作用域，且能创建对象。如此依赖函数有好有坏：好的是它使的语言轻且快速（也是该语言发展的初衷），坏的是如果你不知道你在做什么， &hellip;"> <meta name="keywords" content="">
+<meta name="description" content="tags: 手册 开始装b 1
+2
+3
+4
+5
+6
+7
+rake new_post["title"]
+rake generate
+rake deploy git add .
+git commit -m "Some comment here." git push origin source &hellip;"> <meta name="keywords" content="">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -24,7 +34,7 @@
 <!-- 连接新窗口打开 -->
 <script>
 function addBlankTargetForLinks () {
-  $('.entry-content a[href^="http"]').each(function(){
+  $('.entry-content a[href]').each(function(){
       $(this).attr('target', '_blank');
   });
 }
@@ -68,6 +78,67 @@ $(document).bind('DOMNodeInserted', function(event) {
 	<header>
 		<h2 class="title">
 			
+			<a href="/blog/2013/10/15/handbook">
+			
+				爱整理的都是好姑凉</a>
+		</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-15T20:20:00+08:00" pubdate data-updated="true">Oct 15<span>th</span>, 2013</time></div>
+	</header>
+	<div class="entry-content">
+		<p>tags: <code>手册</code></p>
+
+<br>
+
+
+<h3>开始装b</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake new_post["title"]
+</span><span class='line'>rake generate
+</span><span class='line'>rake deploy
+</span><span class='line'>
+</span><span class='line'>git add .
+</span><span class='line'>git commit -m "Some comment here." 
+</span><span class='line'>git push origin source</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>先睹为快</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake preview
+</span><span class='line'># ctrl + c 退出预览</span></code></pre></td></tr></table></div></figure>
+
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post">
+	<header>
+		<h2 class="title">
+			
 			<a href="/blog/2013/10/15/javascript-function-invocation-patterns">
 			
 				JavaScript: 函数调用模式</a>
@@ -87,7 +158,12 @@ $(document).bind('DOMNodeInserted', function(event) {
 <time datetime="2013-10-15T19:38:00+08:00" pubdate data-updated="true">Oct 15<span>th</span>, 2013</time></div>
 	</header>
 	<div class="entry-content">
-		<p>JavaScript被描述为一个面向函数语言（有别于面向对象的语言）。因为函数在JavaScript中不仅仅是独立的逻辑执行单元，函数是一等公民，它也提供作用域，且能创建对象。如此依赖函数有好有坏：好的是它使的语言轻且快速（也是该语言发展的初衷），坏的是如果你不知道你在做什么，你很容易把自己绕进去。</p>
+		<p>tags: <code>JavaScript</code> <code>this</code> <code>翻译</code></p>
+
+<br>
+
+
+<p>JavaScript被描述为一个面向函数语言（有别于面向对象的语言）。因为函数在JavaScript中不仅仅是独立的逻辑执行单元，函数是一等公民，它也提供作用域，且能创建对象。如此依赖函数有好有坏：好的是它使的语言轻且快速（也是该语言发展的初衷），坏的是如果你不知道你在做什么，你很容易把自己绕进去。</p>
 
 <p>JavaScript函数一个需要关心的问题是，不同的调用模式可以产生截然不同的结果。这篇文章介绍了四种模式，如何使用它们，要注意些什么。四种调用模式如下：</p>
 
@@ -334,19 +410,19 @@ $(document).bind('DOMNodeInserted', function(event) {
 
 <p>原文：<a href="http://doctrina.org/Javascript-Function-Invocation-Patterns.html">http://doctrina.org/Javascript-Function-Invocation-Patterns.html</a></p>
 
-<h1>废话在后</h1>
+<h2>废话在后</h2>
 
-<p>总结下this.
-1.  对于obj.fun()此类方法函数调用,哪个<code>对象实例</code>(obj)调用this所在的函数(fun),this指向那个<code>对象实例</code></p>
+<p>总结下this.</p>
 
 <ol>
+<li><p>对于obj.fun()此类方法函数调用,哪个<code>对象实例</code>(obj)调用this所在的函数(fun),this指向那个<code>对象实例</code></p></li>
 <li><p>对于函数调用,this指向全局对象.(其实可以看做上一种,是window对象的方法函数,全局对象调用,则指向全局对象).避免这种语言设计不合理的一个小技巧就是,进入函数后就申明一个变量<em>this,赋值this给它(</em>this),保存下来.</p></li>
 <li><p>对于构造函数调用,若该函数返回一个简单类型（number, string, boolean, null or undefined），忽略return值，返回this（指向新的对象）;如果该函数返回一个object实例（简单类型以外的任何类型），那么将返回该对象。</p></li>
 <li><p>apply和call调用,this指向apply和call第一参数.即手动设置this的值.</p></li>
 </ol>
 
 
-<p>完.</p>
+<p>10 months ago 完.</p>
 
 		
 		
@@ -378,11 +454,27 @@ $(document).bind('DOMNodeInserted', function(event) {
 <time datetime="2013-10-12T21:51:00+08:00" pubdate data-updated="true">Oct 12<span>th</span>, 2013</time></div>
 	</header>
 	<div class="entry-content">
-		<p>到目前，处理完字体，样式，分享，评论，百度统计，感觉又没有那么又激情了。感觉没有事情可做。</p>
+		<p>tags: <code>随便</code></p>
+
+<br>
+
+
+<p>到目前，处理完字体，样式，分享，评论，百度统计，感觉又没有那么又激情了。感觉没有事情可做。</p>
 
 <p>所以又是三分钟热度吗？</p>
 
 <p>本来为了走向国际，或者学英语之类的，应该来个全英文的博客网站，至少导航和分类应该要国际化。但是，还是觉得文字对我有更多的吸引力。</p>
+
+<p>目前准备了三个目录：</p>
+
+<ul>
+<li><p><a href="/blog/categories/ha-lou-!nu-yi-zhi/">哈喽！女汉纸</a></p></li>
+<li><p><a href="/blog/categories/lai-lai-lai-he-wan-zhe-bei-huan-you-san-bei/">来来来喝完这杯还有三杯</a></p></li>
+<li><p><a href="/blog/categories/2046/">2046</a></p></li>
+</ul>
+
+
+<p>最后一个目录还没开始写。这么聪明的你们知道每个目录啥玩意嘛哈哈哈！</p>
 
 		
 		
@@ -414,7 +506,12 @@ $(document).bind('DOMNodeInserted', function(event) {
 <time datetime="2013-10-10T20:45:00+08:00" pubdate data-updated="true">Oct 10<span>th</span>, 2013</time></div>
 	</header>
 	<div class="entry-content">
-		<p>这是第一次在mac上折腾Octopress, 对于我这种数码/IT杀手来说， 跟win一样麻烦。</p>
+		<p>tags: <code>折腾</code> <code>octopress</code></p>
+
+<br>
+
+
+<p>这是第一次在mac上折腾Octopress, 对于我这种数码/IT杀手来说， 跟win一样麻烦。</p>
 
 <p>但成就感暴涨。尤其是<a href="http://summer222522.github.io/">茂茂</a>赞助了各种美好的<a href="https://github.com/imathis/octopress">主题</a>后，更加激动兴奋了！！</p>
 
@@ -504,8 +601,8 @@ $(document).bind('DOMNodeInserted', function(event) {
 <li>超链接。有没有发现我文章内的连接是打开新窗口的呢，markdown目前应该还不支持这种语法的，当然markdown是支持html。来自己动动手操作下。<a href="https://gist.github.com/azone/4523641">戳</a></li>
 <li>目前的主题，自然是自己做过修改啦！自己动手，丰衣足食。哈哈。设置css样式基本在<code>sass/parts</code>目录下</li>
 <li>文本上下间距。嫌弃默认的间距实在是太大了，改了下。文件同上</li>
-<li>本来添加了加网和友言的评论，觉得太山寨了，档次一下就low了，删掉了。</li>
-<li>啊喂喂喂，我的导航可不是<code>在这里温吞</code>！<code>在</code>是我的网名好嘛。<code>温吞</code>表示了该栏目往往是我三分钟热度写的代码。<code>这里</code>就是这里咯。</li>
+<li>本来添加了加网和友言的评论，觉得太山寨了，档次一下就low了，删掉了。目前使用的addthis的分享和多说的评论。addthis不能分享到微信，缺陷。所以可能还是尽量使用国内的玩意儿更加符合国情吧。</li>
+<li>tips.可以的话还是尽量看官方文档。当然最方便的就是——不要搞了啊！！！</li>
 </ul>
 
 

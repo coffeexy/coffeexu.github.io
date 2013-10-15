@@ -24,7 +24,7 @@
 <!-- 连接新窗口打开 -->
 <script>
 function addBlankTargetForLinks () {
-  $('.entry-content a[href^="http"]').each(function(){
+  $('.entry-content a[href]').each(function(){
       $(this).attr('target', '_blank');
   });
 }

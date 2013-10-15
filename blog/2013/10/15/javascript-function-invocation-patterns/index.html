@@ -7,7 +7,7 @@
 
 	<meta name="author" content="许嘘嘘">
 
-<meta name="description" content="JavaScript被描述为一个面向函数语言（有别于面向对象的语言）。因为函数在JavaScript中不仅仅是独立的逻辑执行单元，函数是一等公民，它也提供作用域，且能创建对象。如此依赖函数有好有坏：好的是它使的语言轻且快速（也是该语言发展的初衷），坏的是如果你不知道你在做什么，你很容易把自己绕进去 &hellip;"> <meta name="keywords" content="">
+<meta name="description" content="tags: JavaScript this 翻译 JavaScript被描述为一个面向函数语言（有别于面向对象的语言）。因为函数在JavaScript中不仅仅是独立的逻辑执行单元，函数是一等公民，它也提供作用域，且能创建对象。如此依赖函数有好有坏：好的是它使的语言轻且快速（也是该语言发展的初衷）， &hellip;"> <meta name="keywords" content="">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -24,7 +24,7 @@
 <!-- 连接新窗口打开 -->
 <script>
 function addBlankTargetForLinks () {
-  $('.entry-content a[href^="http"]').each(function(){
+  $('.entry-content a[href]').each(function(){
       $(this).attr('target', '_blank');
   });
 }
@@ -78,7 +78,12 @@ $(document).bind('DOMNodeInserted', function(event) {
 
 <time datetime="2013-10-15T19:38:00+08:00" pubdate data-updated="true">Oct 15<span>th</span>, 2013</time></div>
 	</header>
-	<div class="entry-content"><p>JavaScript被描述为一个面向函数语言（有别于面向对象的语言）。因为函数在JavaScript中不仅仅是独立的逻辑执行单元，函数是一等公民，它也提供作用域，且能创建对象。如此依赖函数有好有坏：好的是它使的语言轻且快速（也是该语言发展的初衷），坏的是如果你不知道你在做什么，你很容易把自己绕进去。</p>
+	<div class="entry-content"><p>tags: <code>JavaScript</code> <code>this</code> <code>翻译</code></p>
+
+<br>
+
+
+<p>JavaScript被描述为一个面向函数语言（有别于面向对象的语言）。因为函数在JavaScript中不仅仅是独立的逻辑执行单元，函数是一等公民，它也提供作用域，且能创建对象。如此依赖函数有好有坏：好的是它使的语言轻且快速（也是该语言发展的初衷），坏的是如果你不知道你在做什么，你很容易把自己绕进去。</p>
 
 <p>JavaScript函数一个需要关心的问题是，不同的调用模式可以产生截然不同的结果。这篇文章介绍了四种模式，如何使用它们，要注意些什么。四种调用模式如下：</p>
 
@@ -325,19 +330,19 @@ $(document).bind('DOMNodeInserted', function(event) {
 
 <p>原文：<a href="http://doctrina.org/Javascript-Function-Invocation-Patterns.html">http://doctrina.org/Javascript-Function-Invocation-Patterns.html</a></p>
 
-<h1>废话在后</h1>
+<h2>废话在后</h2>
 
-<p>总结下this.
-1.  对于obj.fun()此类方法函数调用,哪个<code>对象实例</code>(obj)调用this所在的函数(fun),this指向那个<code>对象实例</code></p>
+<p>总结下this.</p>
 
 <ol>
+<li><p>对于obj.fun()此类方法函数调用,哪个<code>对象实例</code>(obj)调用this所在的函数(fun),this指向那个<code>对象实例</code></p></li>
 <li><p>对于函数调用,this指向全局对象.(其实可以看做上一种,是window对象的方法函数,全局对象调用,则指向全局对象).避免这种语言设计不合理的一个小技巧就是,进入函数后就申明一个变量<em>this,赋值this给它(</em>this),保存下来.</p></li>
 <li><p>对于构造函数调用,若该函数返回一个简单类型（number, string, boolean, null or undefined），忽略return值，返回this（指向新的对象）;如果该函数返回一个object实例（简单类型以外的任何类型），那么将返回该对象。</p></li>
 <li><p>apply和call调用,this指向apply和call第一参数.即手动设置this的值.</p></li>
 </ol>
 
 
-<p>完.</p>
+<p>10 months ago 完.</p>
 </div>
 
 </article>

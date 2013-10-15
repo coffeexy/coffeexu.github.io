@@ -2,29 +2,33 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://CoffeeXu.github.io/blog/2013/10/10/hello-again-octopress</loc>
-        <lastmod>2013-10-15T19:44:03+08:00</lastmod>
+        <lastmod>2013-10-15T20:17:39+08:00</lastmod>
     </url>
     <url>
         <loc>http://CoffeeXu.github.io/blog/2013/10/12/no-longer</loc>
-        <lastmod>2013-10-12T22:15:32+08:00</lastmod>
+        <lastmod>2013-10-15T20:34:11+08:00</lastmod>
     </url>
     <url>
         <loc>
             http://CoffeeXu.github.io/blog/2013/10/15/javascript-function-invocation-patterns
         </loc>
-        <lastmod>2013-10-15T19:44:46+08:00</lastmod>
+        <lastmod>2013-10-15T20:14:21+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://CoffeeXu.github.io/blog/2013/10/15/handbook</loc>
+        <lastmod>2013-10-15T20:50:16+08:00</lastmod>
     </url>
     <url>
         <loc>http://CoffeeXu.github.io/blog/archives/</loc>
-        <lastmod>2013-10-15T19:44:46+08:00</lastmod>
+        <lastmod>2013-10-15T20:50:16+08:00</lastmod>
     </url>
     <url>
         <loc>http://CoffeeXu.github.io/blog/</loc>
-        <lastmod>2013-10-15T19:44:46+08:00</lastmod>
+        <lastmod>2013-10-15T20:50:16+08:00</lastmod>
     </url>
     <url>
         <loc>http://CoffeeXu.github.io/</loc>
-        <lastmod>2013-10-15T19:44:46+08:00</lastmod>
+        <lastmod>2013-10-15T20:50:16+08:00</lastmod>
     </url>
     <url>
         <loc>http://CoffeeXu.github.io/robots.txt</loc>

@@ -7,7 +7,7 @@
 
 	<meta name="author" content="许嘘嘘">
 
-<meta name="description" content="这是第一次在mac上折腾Octopress, 对于我这种数码/IT杀手来说， 跟win一样麻烦。 但成就感暴涨。尤其是茂茂赞助了各种美好的主题后，更加激动兴奋了！！ 哈哈，最喜欢折腾了！折腾无止境！ 但是折腾完之后，不知道可以坚持纪录多久的博客，求监督。 接下来， 正式总结此次折腾遇到的麻烦。 坑 &hellip;"> <meta name="keywords" content="">
+<meta name="description" content="tags: 折腾 octopress 这是第一次在mac上折腾Octopress, 对于我这种数码/IT杀手来说， 跟win一样麻烦。 但成就感暴涨。尤其是茂茂赞助了各种美好的主题后，更加激动兴奋了！！ 哈哈，最喜欢折腾了！折腾无止境！ 但是折腾完之后，不知道可以坚持纪录多久的博客，求监督。 &hellip;"> <meta name="keywords" content="">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -24,7 +24,7 @@
 <!-- 连接新窗口打开 -->
 <script>
 function addBlankTargetForLinks () {
-  $('.entry-content a[href^="http"]').each(function(){
+  $('.entry-content a[href]').each(function(){
       $(this).attr('target', '_blank');
   });
 }
@@ -78,7 +78,12 @@ $(document).bind('DOMNodeInserted', function(event) {
 
 <time datetime="2013-10-10T20:45:00+08:00" pubdate data-updated="true">Oct 10<span>th</span>, 2013</time></div>
 	</header>
-	<div class="entry-content"><p>这是第一次在mac上折腾Octopress, 对于我这种数码/IT杀手来说， 跟win一样麻烦。</p>
+	<div class="entry-content"><p>tags: <code>折腾</code> <code>octopress</code></p>
+
+<br>
+
+
+<p>这是第一次在mac上折腾Octopress, 对于我这种数码/IT杀手来说， 跟win一样麻烦。</p>
 
 <p>但成就感暴涨。尤其是<a href="http://summer222522.github.io/">茂茂</a>赞助了各种美好的<a href="https://github.com/imathis/octopress">主题</a>后，更加激动兴奋了！！</p>
 
@@ -168,8 +173,8 @@ $(document).bind('DOMNodeInserted', function(event) {
 <li>超链接。有没有发现我文章内的连接是打开新窗口的呢，markdown目前应该还不支持这种语法的，当然markdown是支持html。来自己动动手操作下。<a href="https://gist.github.com/azone/4523641">戳</a></li>
 <li>目前的主题，自然是自己做过修改啦！自己动手，丰衣足食。哈哈。设置css样式基本在<code>sass/parts</code>目录下</li>
 <li>文本上下间距。嫌弃默认的间距实在是太大了，改了下。文件同上</li>
-<li>本来添加了加网和友言的评论，觉得太山寨了，档次一下就low了，删掉了。</li>
-<li>啊喂喂喂，我的导航可不是<code>在这里温吞</code>！<code>在</code>是我的网名好嘛。<code>温吞</code>表示了该栏目往往是我三分钟热度写的代码。<code>这里</code>就是这里咯。</li>
+<li>本来添加了加网和友言的评论，觉得太山寨了，档次一下就low了，删掉了。目前使用的addthis的分享和多说的评论。addthis不能分享到微信，缺陷。所以可能还是尽量使用国内的玩意儿更加符合国情吧。</li>
+<li>tips.可以的话还是尽量看官方文档。当然最方便的就是——不要搞了啊！！！</li>
 </ul>
 
 </div>
