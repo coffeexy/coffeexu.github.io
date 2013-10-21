@@ -4,13 +4,48 @@
   <title><![CDATA[所以。]]></title>
   <link href="http://CoffeeXu.github.io/atom.xml" rel="self"/>
   <link href="http://CoffeeXu.github.io/"/>
-  <updated>2013-10-15T20:51:12+08:00</updated>
+  <updated>2013-10-21T21:52:33+08:00</updated>
   <id>http://CoffeeXu.github.io/</id>
   <author>
     <name><![CDATA[许嘘嘘]]></name>
     
   </author>
 
+  
+  <entry>
+    <title type="html"><![CDATA[外边距合并的其中一种]]></title>
+    <link href="http://CoffeeXu.github.io/blog/2013/10/21/collapsing-margins"/>
+    <updated>2013-10-21T20:31:00+08:00</updated>
+    <id>http://CoffeeXu.github.io/blog/2013/10/21/collapsing-margins</id>
+    <content type="html"><![CDATA[<p>tags: <code>外边距合并</code> <code>collapsing margins</code></p>
+
+<br>
+
+
+<p>群里的一位同学遇到的问题：<a href="http://jsbin.com/OdEyoh/3/edit">JSBin</a></p>
+
+<p>原本是一个居中的问题，为什么position修改为<code>relative</code>就不能居中了呢？</p>
+
+<p>因为这里莫名其妙地满足了外边距合并的情况：</p>
+
+<ul>
+<li><p>普通文档流的块级元素；</p></li>
+<li><p>且一个元素包含在另一个元素中，没有<code>内边距</code>或<code>边框</code>把外边距分隔开。所以它们的上和/或下外边距发生了合并。所以麻烦都转移到父元素a上了。</p></li>
+</ul>
+
+
+<p>解决办法：</p>
+
+<ul>
+<li>使其中一个元素，变为<code>非</code>普通文档流中的块级元素，例如变为浮动元素(float)｜脱离文档流(position)｜内联元素(inline-block);</li>
+<li>设置padding和border分开两个元素的外边距。(父元素上设置。子元素设置，还是没有把两个的margin分开好嘛)</li>
+<li>父元素添加<code>overflow:hidden;</code></li>
+</ul>
+
+
+<p>一定要拜读的资料<a href="http://www.w3school.com.cn/css/css_margin_collapsing.asp">w3school-CSS 外边距合并</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[爱整理的都是好姑凉]]></title>
