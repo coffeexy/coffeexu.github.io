@@ -13,9 +13,9 @@ footer: true
 
 ###JavaScript
 * [翻页](http://coffeexu.github.io/Code/slide.html)
-* [图片取色]()
+* [图片取色](http://coffeexu.github.io/getcolor)
 
 ###人工智能
-* [识别手写0｜1]()
+* [识别手写0｜1](http://coffeexu.github.io/teachMe)
 
 <!-- * [响应式布局2](http://coffeexu.github.io/Code/response2.html) -->
