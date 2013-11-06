@@ -16,6 +16,6 @@ footer: true
 * [图片取色](http://coffeexu.github.io/Code/getColor.html)
 
 ###人工智能
-* [识别手写0｜1](http://coffeexu.github.io/teachMe)
+* [识别手写0｜1](http://coffeexu.github.io/Code/learn01.html)
 
 <!-- * [响应式布局2](http://coffeexu.github.io/Code/response2.html) -->
