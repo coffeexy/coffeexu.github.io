@@ -7,7 +7,7 @@
 
 	<meta name="author" content="许嘘嘘">
 
-<meta name="description" content="tags: 随便 到目前，处理完字体，样式，分享，评论，百度统计，感觉又没有那么又激情了。感觉没有事情可做。 所以又是三分钟热度吗？ 本来为了走向国际，或者学英语之类的，应该来个全英文的博客网站，至少导航和分类应该要国际化。但是，还是觉得文字对我有更多的吸引力。 目前准备了三个目录： 哈喽！ &hellip;"> <meta name="keywords" content="">
+<meta name="description" content="tags: JavaScript this 翻译 JavaScript被描述为一个面向函数语言（有别于面向对象的语言）。因为函数在JavaScript中不仅仅是独立的逻辑执行单元，函数是一等公民，它也提供作用域，且能创建对象。如此依赖函数有好有坏：好的是它使的语言轻且快速（也是该语言发展的初衷 &hellip;"> <meta name="keywords" content="">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -62,6 +62,302 @@ $(document).bind('DOMNodeInserted', function(event) {
 </header>
 
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<header>
+		<h2 class="title">
+			
+			<a href="/blog/2013/10/15/javascript-function-invocation-patterns">
+			
+				JavaScript: 函数调用模式</a>
+		</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-15T19:38:00+08:00" pubdate data-updated="true">Oct 15<span>th</span>, 2013</time></div>
+	</header>
+	<div class="entry-content">
+		<p>tags: <code>JavaScript</code> <code>this</code> <code>翻译</code></p>
+
+<br>
+
+
+<p>JavaScript被描述为一个面向函数语言（有别于面向对象的语言）。因为函数在JavaScript中不仅仅是独立的逻辑执行单元，函数是一等公民，它也提供作用域，且能创建对象。如此依赖函数有好有坏：好的是它使的语言轻且快速（也是该语言发展的初衷），坏的是如果你不知道你在做什么，你很容易把自己绕进去。</p>
+
+<p>JavaScript函数一个需要关心的问题是，不同的调用模式可以产生截然不同的结果。这篇文章介绍了四种模式，如何使用它们，要注意些什么。四种调用模式如下：</p>
+
+<p>1、方法调用（Method Invocation）</p>
+
+<p>2、函数调用（Function Invocation）</p>
+
+<p>3、构造函数调用（Constructor Invocation）</p>
+
+<p>4、apply和call调用（Apply And Call Invocation）</p>
+
+<h2>函数执行</h2>
+
+<p>Javascript（像现今所有语言）函数有逻辑模块化的功能，它可以在执行的任何时候被调用。调用函数时，暂停执行当前函数，传递控制和参数给被调用的函数。此外，this参数也被传递给函数。调用操作符是一对圆括号（） ，它可以包含0个或多个以逗号分隔的表达式。</p>
+
+<p>不幸的是，有多种模式可用来调用函数。这些模式并不是nice-to-know：绝对有必要了解它们。因为不同模式调用函数可以产生截然不同的结果。我认为这是JavaScript在语言设计上的错误，如果设计语言时多些思考（少些匆忙），也不会产生这么大的问题。</p>
+
+<h2>四种调用模式</h2>
+
+<p>虽然只有一个调用操作符（），但有四种调用模式。每种模式在初始化this参数时有所不同。</p>
+
+<h3>方法调用</h3>
+
+<p>对象中的函数，称为方法。方法调用是调用对象中的函数的模式。例如：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">value</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">increment</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">this</span><span class="p">.</span><span class="nx">value</span><span class="o">+=</span><span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">obj</span><span class="p">.</span><span class="nx">increment</span><span class="p">();</span> <span class="c1">//Method invocation</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>若函数前面有对象实例object，则称为方法调用。JavaScript将this参数指向调用方法的对象。如上例，this指向obj。Javascript在执行时绑定this（也被称为晚绑定）。</p>
+
+<h3>函数调用</h3>
+
+<p>使用（）调用函数，称为函数调用：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">add</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">);</span> <span class="c1">//5</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>使用函数调用模式，this指向全局对象。这是JavaScript语言中的错误！盲目绑定this到全局对象会破坏当前上下文。尤其是在方法函数内使用<code>内部函数</code>。下面这个例子做了很好地解释：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="mi">500</span><span class="p">;</span> <span class="c1">//Global variable</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">value</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">increment</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">this</span><span class="p">.</span><span class="nx">value</span><span class="o">++</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="kd">var</span> <span class="nx">innerFunction</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">alert</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="nx">innerFunction</span><span class="p">();</span> <span class="c1">//Function invocation pattern</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nx">obj</span><span class="p">.</span><span class="nx">increment</span><span class="p">();</span> <span class="c1">//Method invocation pattern</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>你认为屏幕上显示什么？答案是1的，不好意思你错了（但不要太为难自己，这是JavaScript没有处理好）。真正的答案是500。注意，innerFunction使用函数调用模式，因此this被设置为全局对象。结果就是innerFunction（再次强调，它是函数调用模式）没有指向当前对象的this参数。相反，它（this）被设置到全局对象，其value值被定义为500。我要强调，这是很糟糕的语言设计；增量函数采用方法调用模式来调用，很自然地认为在内部使用它时，this应该总是指向当前函数。</p>
+
+<p>有一个简单的方法来避开这个问题，但在我看来是一种hack。在函数内部定义一个变量（按照惯例，命名为that），将this赋值给这个变量。（题外话：这种方式可行使因为JavaScript中的函数是闭包）：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="mi">500</span><span class="p">;</span> <span class="c1">//Global variable</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">value</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">increment</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="kd">var</span> <span class="nx">that</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+</span><span class='line'>        <span class="nx">that</span><span class="p">.</span><span class="nx">value</span><span class="o">++</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="kd">var</span> <span class="nx">innerFunction</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">alert</span><span class="p">(</span><span class="nx">that</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="nx">innerFunction</span><span class="p">();</span> <span class="c1">//Function invocation pattern</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nx">obj</span><span class="p">.</span><span class="nx">increment</span><span class="p">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果this可以绑定到调用的当前对象作用域，函数和方法调用是一样的。</p>
+
+<h3>构造函数调用</h3>
+
+<p>注意：这是JavaScript另一个特点！JavaScript不是class式面向对象的语言。相反，它是一个propertype式面向对象的语言，但JavaScript的创建者认为，熟悉传统的面向对象经验的人（绝大多数）可能对纯粹的原型形式不满。这导致JavaScript对其原型特征不确定，最糟糕的事情发生了：它混合了经典的面向对象的语法和自身原型性质。结果：一塌糊涂！</p>
+
+<p>传统的面向对象，对象是类的实例。在C++和Java中，这个实例是通过使用new操作符生成。这似乎是构造函数调用模式背后的灵感&hellip;</p>
+
+<p>构造函数调用模式是，在被调用的函数之前用new操作符。例如：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">Cheese</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">cheeseType</span> <span class="o">=</span> <span class="nx">type</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nx">cheeseType</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">cheddar</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Cheese</span><span class="p">(</span><span class="s2">&quot;cheddar&quot;</span><span class="p">);</span> <span class="c1">//new object returned, not the type.</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>虽然Cheese是一个函数对象（有人将函数作为运行模块化的代码块），通过调用带new关键字的函数，来创建一个新的对象。this参数将指向新创建的对象，而函数的return操作符，will have its behaviour altered。关于构造函数调用的return操作符行为有两种情况：</p>
+
+<p>1、如果该函数返回一个简单类型（number, string, boolean, null or undefined），忽略return，返回this（指向新的对象）。
+2、如果该函数返回一个object实例（简单类型以外的任何类型），那么将返回的对象，而不是返回this。这种模式是不经常使用，但当它与闭包相结合的时候非常有用。</p>
+
+<p>例如：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">data</span> <span class="o">:</span> <span class="s2">&quot;Hello World&quot;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">var</span> <span class="nx">Func1</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nx">obj</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">var</span> <span class="nx">Func2</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="s2">&quot;I am a simple type&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">var</span> <span class="nx">f1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Func1</span><span class="p">();</span> <span class="c1">//f1 is set to obj</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">f2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Func2</span><span class="p">();</span> <span class="c1">//f2 is set to a new object</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>我们可能会忽略JavaScript创建者给予该语言的独特之处：利用任意原型链创建对象，而只使用对象字面量来创建对象。这种模式很直观但也存在潜在问题。不过可以通过扩展对象的创建方法，实现构造函数调用模式的方法，<a href="http://doctrina.org/JavaScript:Why-Understanding-Scope-And-Closures-Matter.html#closureandconstructor">例子</a>。JavaScript 1.8.5实现了Object.create。构造函数调用仍然频繁使用。</p>
+
+<h3>apply和call调用</h3>
+
+<p>apply模式相比之前的模式，没有那么糟糕。apply方法允许，通过传递参数数组给函数来手动调用函数，明确设置this参数。因为函数是一等公民，他们也是对象，因此也可以运行方法（函数）。事实上，每一个function都指向Function.prototype,因此方法可以很容易扩展函数。apply方法就是一个函数扩展方法-我的猜想-它定义在Function.prototype中。</p>
+
+<p>apply有两个参数：第一个参数是this参数绑定的对象，第二个参数是一个数组，它被映射为第一个对象的参数：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">add</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">num1</span><span class="p">,</span> <span class="nx">num2</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="nx">num1</span><span class="o">+</span><span class="nx">num2</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">array</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">];</span>
+</span><span class='line'><span class="nx">add</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span><span class="nx">array</span><span class="p">);</span> <span class="c1">//7</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>上面的例子中，this为空（该函数不是一个对象，所以它不需要）和数组为num1与num2。第一个参数可以更有趣：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">data</span><span class="o">:</span><span class="s1">&#39;Hello World&#39;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">var</span> <span class="nx">displayData</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">alert</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">displayData</span><span class="p">();</span> <span class="c1">//undefined</span>
+</span><span class='line'><span class="nx">displayData</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">obj</span><span class="p">);</span> <span class="c1">//Hello World</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>上面的例子使用apply绑定this到obj。结果产生一个this.data值。apply的实际应用价值,就是能明确分配一个值给this.。要是没有这个功能，我们可以直接使用（）来调用函数。</p>
+
+<p>JavaScript还有种调用方法是call，类似apply方法,不过它传递的不是一个参数数组,而是一个参数列表。如果JavaScript可以实现的函数重载，我认为call应该是apply方法的重载。因此，人们谈论的apply和call其实是一样的。</p>
+
+<h2>结论</h2>
+
+<p>无论好坏，JavaScript都已经流行了。了解语言的特征,并避免这种特性带来的异常非常重要。学习四种函数调用方法哪里不同，以及如何避免缺陷是使用JavaScript的基础。</p>
+
+<p>原文：<a href="http://doctrina.org/Javascript-Function-Invocation-Patterns.html">http://doctrina.org/Javascript-Function-Invocation-Patterns.html</a></p>
+
+<h2>废话在后</h2>
+
+<p>总结下this.</p>
+
+<ol>
+<li><p>对于obj.fun()此类方法函数调用,哪个<code>对象实例</code>(obj)调用this所在的函数(fun),this指向那个<code>对象实例</code></p></li>
+<li><p>对于函数调用,this指向全局对象.(其实可以看做上一种,是window对象的方法函数,全局对象调用,则指向全局对象).避免这种语言设计不合理的一个小技巧就是,进入函数后就申明一个变量<em>this,赋值this给它(</em>this),保存下来.</p></li>
+<li><p>对于构造函数调用,若该函数返回一个简单类型（number, string, boolean, null or undefined），忽略return值，返回this（指向新的对象）;如果该函数返回一个object实例（简单类型以外的任何类型），那么将返回该对象。</p></li>
+<li><p>apply和call调用,this指向apply和call第一参数.即手动设置this的值.</p></li>
+</ol>
+
+
+<p>10 months ago 完.</p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post">
