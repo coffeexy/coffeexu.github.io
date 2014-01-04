@@ -3,11 +3,12 @@
 <html lang="en-GB">
 <head>
 	<meta charset="utf-8">
-	<title>嗨，近来可好？  | 所以。</title>
+	<title>IE inherited margin bug: form elements and hasLayout  | 所以。</title>
 
 	<meta name="author" content="许嘘嘘">
 
-<meta name="description" content="tags: 近况 近况这个词就像，“下次来玩啊”，“饭吃了没”，“我爱你”一样虚无。 不听周杰伦之后，知道乐坛还有很多好听的歌，很多很棒的艺人；可是说起来，还是最爱周杰伦。需要理由吗？ 生活就是这么难，就跟这篇文章一样，没有什么主题，东拼西凑，零零散散，孤孤单单。只是我很想写点东西， &hellip;"> <meta name="keywords" content="">
+<meta name="description" content="tags: IE 表单 兼容 总是要切换浏览器的“浏览器模式”和“文档模式”，来测试下IE浏览器是否显示正常，这两种模式的排列组合的情况总是搞不清相互有什么关系，先mark下——
+浏览器模式影响的是浏览器的版本及IE的条件注释，会影响服务器端对浏览器版本的判断,主要表现在展现，对CSS影响很大。 &hellip;"> <meta name="keywords" content="">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -63,7 +64,7 @@ $(document).bind('DOMNodeInserted', function(event) {
 
 	<div id="content" class="inner"><article class="post">
 	<header>
-		<h2 class="title">嗨，近来可好？</h2>
+		<h2 class="title">IE Inherited Margin Bug: Form Elements and hasLayout</h2>
 		<div class="meta date">
 
 
@@ -76,32 +77,32 @@ $(document).bind('DOMNodeInserted', function(event) {
   
 
 
-<time datetime="2013-12-15T22:04:00+08:00" pubdate data-updated="true">Dec 15<span>th</span>, 2013</time></div>
+<time datetime="2014-01-04T13:15:00+08:00" pubdate data-updated="true">Jan 4<span>th</span>, 2014</time></div>
 	</header>
-	<div class="entry-content"><p>tags: <code>近况</code></p>
+	<div class="entry-content"><p>tags: <code>IE</code> <code>表单</code> <code>兼容</code></p>
 
 <br>
 
 
-<p><code>近况</code>这个词就像，“下次来玩啊”，“饭吃了没”，“我爱你”一样虚无。</p>
+<p>总是要切换浏览器的“浏览器模式”和“文档模式”，来测试下IE浏览器是否显示正常，这两种模式的排列组合的情况总是搞不清相互有什么关系，先mark下——<br>
+<code>浏览器模式</code>影响的是浏览器的版本及IE的条件注释，会影响服务器端对浏览器版本的判断,主要表现在展现，对CSS影响很大。<br>
+<code>文档模式</code>影响的是IE的排版引擎，对DOM的渲染会产生影响。</p>
 
-<p>不听周杰伦之后，知道乐坛还有很多好听的歌，很多很棒的艺人；可是说起来，还是最爱周杰伦。需要理由吗？</p>
+<p>hasLayout这个IE的特有属性已经很熟悉了，平常都是需要激发hasLayout来解决很多渲染的问题，这次遇到一个因为hasLayout=true造成的IE兼容性问题。<br>
+问题代码演示：<a href="http://jsbin.com/oZeYOve/1/edit">http://jsbin.com/oZeYOve/1/edit</a> <br>
+问题描述：input属性继承了父类的margin值，导致input左边的距离不受控制（事实上右边也会有问题）。也就是说input会继承父类水平方向的margin值，叠加到自身。IE7及以下浏览器会出现这个问题。</p>
 
-<p>生活就是这么难，就跟这篇文章一样，没有什么主题，东拼西凑，零零散散，孤孤单单。只是我很想写点东西，不然很多时候都觉得自己是在自言自语。有时候觉得记忆中或美好或痛苦的事情从来就没有发生过，有时候觉得除了自己大概所有东西都是想象。有什么关系？就算真真假假有什么关系？有不喜欢的人喜欢有什么关系？喜欢的人不喜欢又有什么关系？本来就是喜欢忤逆，你都这样，又怎么不让别人忤逆？反正你顺从妥协以后，不见得生活这个婊子就顺了你的意。所以呢</p>
+<p>但是，出现该bug的前提是父类是一个被激活了hasLayout的元素。该例子中如果去掉div#search-box的width和height，问题可以被修复。或者将form元素包含到div#search-box元素内。但肯定要遇到“臣妾做不到啊”的情况。<br>
+解决办法：<br>
+1.CSS hack，给input设置margin负值，用来抵消继承下来的父类margin值。<br>
+2.删除父类的margin值。<br>
+3.取消父类的hasLayout属性。<br>
+4.在input元素之前放文本元素，或者label元素，或者任何的行元素。<br>
+5.用span元素把input包起来。</p>
 
-<p>现在下班我会说回家。所以没有男朋友或者依靠或者所谓的安全感，还是会有归属感的。<br>
-小时候总是以为自己长大了会是很厉害的人，长大了才羡慕小时候的自己是这么乐观潇洒和自信，自信而无所畏惧，自信而不自知。</p>
+<p>另外我其实遇到过另一个奇葩的问题，input的左边距坍塌。浏览器查看样式点来点去的时候，左边距生效，静止的时候，左边距又退回去了！因为项目中这个页面去掉了，也没办法重现，不知道是哪里的起了冲突。还是先mark</p>
 
-<p>真的很忙，却还是睡觉很多。<br>
-昨晚梦里一直嚎啕大哭，哭醒了睫毛上还有泪。现实里不敢流下来的眼泪全部在梦里面倾泄。<br>
-绿萝又抽了新芽，我还是选择电话你如果死神给我机会最后拨打一通号码即使我知道你永远都不会接。<br>
-每天下班都想早点回家的感觉真好。<br>
-想过体验各种不同的职业，就是没办法想做公务员。<br>
-我也想更新一篇博客，你知道地址嘛？<br>
-会经常电话家里，然后总是被催好找男朋友了，拜托我还是中学生怎么能早恋！<br>
-圣诞节一起过好嘛？<br>
-<code>佳Y</code>，114路真的好狗啊半个小时一班有木有！<br>
-我在路上<br></p>
+<p>参考资料:[1]<a href="http://www.positioniseverything.net/explorer/inherited_margin.html">http://www.positioniseverything.net/explorer/inherited_margin.html</a></p>
 </div>
 
 </article>
@@ -111,19 +112,19 @@ $(document).bind('DOMNodeInserted', function(event) {
 	<div class="share">
 	  <ul>
 	    <li>
-  <a href="https://twitter.com/intent/tweet?text=嗨，近来可好？ by @&url=http://CoffeeXu.github.io/blog/2013/12/15/recent201312" title="Share 嗨，近来可好？ on Twitter">
+  <a href="https://twitter.com/intent/tweet?text=IE inherited margin bug: form elements and hasLayout by @&url=http://CoffeeXu.github.io/blog/2014/01/04/ie-inherited-margin-bug" title="Share IE inherited margin bug: form elements and hasLayout on Twitter">
     <img src="/images/social/twitter.png" />
   </a>
 </li>
 
 	    <li>
-  <a href="https://www.facebook.com/sharer.php?u=http://CoffeeXu.github.io/blog/2013/12/15/recent201312" title="Share 嗨，近来可好？ on Facebook">
+  <a href="https://www.facebook.com/sharer.php?u=http://CoffeeXu.github.io/blog/2014/01/04/ie-inherited-margin-bug" title="Share IE inherited margin bug: form elements and hasLayout on Facebook">
     <img src="/images/social/facebook.png" />
   </a>
 </li>
 
 	    <li>
-  <a href="https://plus.google.com/share?url=http://CoffeeXu.github.io/blog/2013/12/15/recent201312" title="Share 嗨，近来可好？ on Google Plus">
+  <a href="https://plus.google.com/share?url=http://CoffeeXu.github.io/blog/2014/01/04/ie-inherited-margin-bug" title="Share IE inherited margin bug: form elements and hasLayout on Google Plus">
     <img src="/images/social/google.png" />
   </a>
 </li>
@@ -209,8 +210,8 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://CoffeeXu.github.io/blog/2013/12/15/recent201312';
-        var disqus_url = 'http://CoffeeXu.github.io/blog/2013/12/15/recent201312';
+        var disqus_identifier = 'http://CoffeeXu.github.io/blog/2014/01/04/ie-inherited-margin-bug';
+        var disqus_url = 'http://CoffeeXu.github.io/blog/2014/01/04/ie-inherited-margin-bug';
         var disqus_script = 'embed.js';
       
     (function () {

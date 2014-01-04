@@ -7,7 +7,8 @@
 
 	<meta name="author" content="许嘘嘘">
 
-<meta name="description" content="tags: JavaScript this 翻译 JavaScript被描述为一个面向函数语言（有别于面向对象的语言）。因为函数在JavaScript中不仅仅是独立的逻辑执行单元，函数是一等公民，它也提供作用域，且能创建对象。如此依赖函数有好有坏：好的是它使的语言轻且快速（也是该语言发展的初衷 &hellip;"> <meta name="keywords" content="">
+<meta name="description" content="tags: 外边距合并 collapsing margins 群里的一位同学遇到的问题：JSBin 原本是一个居中的问题，为什么position修改为relative就不能居中了呢？ 因为这里莫名其妙地满足了外边距合并的情况： 普通文档流的块级元素；
+且一个元素包含在另一个元素中， &hellip;"> <meta name="keywords" content="">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -62,6 +63,125 @@ $(document).bind('DOMNodeInserted', function(event) {
 </header>
 
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<header>
+		<h2 class="title">
+			
+			<a href="/blog/2013/10/21/collapsing-margins">
+			
+				外边距合并的其中一种</a>
+		</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-21T20:31:00+08:00" pubdate data-updated="true">Oct 21<span>st</span>, 2013</time></div>
+	</header>
+	<div class="entry-content">
+		<p>tags: <code>外边距合并</code> <code>collapsing margins</code></p>
+
+<br>
+
+
+<p>群里的一位同学遇到的问题：<a href="http://jsbin.com/OdEyoh/3/edit">JSBin</a></p>
+
+<p>原本是一个居中的问题，为什么position修改为<code>relative</code>就不能居中了呢？</p>
+
+<p>因为这里莫名其妙地满足了外边距合并的情况：</p>
+
+<ul>
+<li><p>普通文档流的块级元素；</p></li>
+<li><p>且一个元素包含在另一个元素中，没有<code>内边距</code>或<code>边框</code>把外边距分隔开。所以它们的上和/或下外边距发生了合并。所以麻烦都转移到父元素a上了。</p></li>
+</ul>
+
+
+<p>解决办法：</p>
+
+<ul>
+<li>使其中一个元素，变为<code>非</code>普通文档流中的块级元素，例如变为浮动元素(float)｜脱离文档流(position)｜内联元素(inline-block);</li>
+<li>设置padding和border分开两个元素的外边距。(父元素上设置。子元素设置，还是没有把两个的margin分开好嘛)</li>
+<li>父元素添加<code>overflow:hidden;</code></li>
+</ul>
+
+
+<p>一定要拜读的资料<a href="http://www.w3school.com.cn/css/css_margin_collapsing.asp">w3school-CSS 外边距合并</a></p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post">
+	<header>
+		<h2 class="title">
+			
+			<a href="/blog/2013/10/15/handbook">
+			
+				爱整理的都是好姑凉</a>
+		</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-15T20:20:00+08:00" pubdate data-updated="true">Oct 15<span>th</span>, 2013</time></div>
+	</header>
+	<div class="entry-content">
+		<p>tags: <code>手册</code></p>
+
+<br>
+
+
+<h3>开始装b</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake new_post["title"]
+</span><span class='line'>rake generate
+</span><span class='line'>rake deploy
+</span><span class='line'>
+</span><span class='line'>git add .
+</span><span class='line'>git commit -m "Some comment here." 
+</span><span class='line'>git push origin source</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>先睹为快</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake preview
+</span><span class='line'># ctrl + c 退出预览</span></code></pre></td></tr></table></div></figure>
+
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post">
@@ -549,7 +669,7 @@ $(document).bind('DOMNodeInserted', function(event) {
 </nav>
 </div>
 	<footer id="footer" class="inner"><br>
-&copy; 2013
+&copy; 2014
 
     许嘘嘘
 

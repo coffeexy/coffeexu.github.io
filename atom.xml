@@ -4,13 +4,81 @@
   <title><![CDATA[所以。]]></title>
   <link href="http://CoffeeXu.github.io/atom.xml" rel="self"/>
   <link href="http://CoffeeXu.github.io/"/>
-  <updated>2013-12-27T22:54:11+08:00</updated>
+  <updated>2014-01-04T13:40:30+08:00</updated>
   <id>http://CoffeeXu.github.io/</id>
   <author>
     <name><![CDATA[许嘘嘘]]></name>
     
   </author>
 
+  
+  <entry>
+    <title type="html"><![CDATA[IE inherited margin bug: form elements and hasLayout]]></title>
+    <link href="http://CoffeeXu.github.io/blog/2014/01/04/ie-inherited-margin-bug"/>
+    <updated>2014-01-04T13:15:00+08:00</updated>
+    <id>http://CoffeeXu.github.io/blog/2014/01/04/ie-inherited-margin-bug</id>
+    <content type="html"><![CDATA[<p>tags: <code>IE</code> <code>表单</code> <code>兼容</code></p>
+
+<br>
+
+
+<p>总是要切换浏览器的“浏览器模式”和“文档模式”，来测试下IE浏览器是否显示正常，这两种模式的排列组合的情况总是搞不清相互有什么关系，先mark下——<br>
+<code>浏览器模式</code>影响的是浏览器的版本及IE的条件注释，会影响服务器端对浏览器版本的判断,主要表现在展现，对CSS影响很大。<br>
+<code>文档模式</code>影响的是IE的排版引擎，对DOM的渲染会产生影响。</p>
+
+<p>hasLayout这个IE的特有属性已经很熟悉了，平常都是需要激发hasLayout来解决很多渲染的问题，这次遇到一个因为hasLayout=true造成的IE兼容性问题。<br>
+问题代码演示：<a href="http://jsbin.com/oZeYOve/1/edit">http://jsbin.com/oZeYOve/1/edit</a> <br>
+问题描述：input属性继承了父类的margin值，导致input左边的距离不受控制（事实上右边也会有问题）。也就是说input会继承父类水平方向的margin值，叠加到自身。IE7及以下浏览器会出现这个问题。</p>
+
+<p>但是，出现该bug的前提是父类是一个被激活了hasLayout的元素。该例子中如果去掉div#search-box的width和height，问题可以被修复。或者将form元素包含到div#search-box元素内。但肯定要遇到“臣妾做不到啊”的情况。<br>
+解决办法：<br>
+1.CSS hack，给input设置margin负值，用来抵消继承下来的父类margin值。<br>
+2.删除父类的margin值。<br>
+3.取消父类的hasLayout属性。<br>
+4.在input元素之前放文本元素，或者label元素，或者任何的行元素。<br>
+5.用span元素把input包起来。</p>
+
+<p>另外我其实遇到过另一个奇葩的问题，input的左边距坍塌。浏览器查看样式点来点去的时候，左边距生效，静止的时候，左边距又退回去了！因为项目中这个页面去掉了，也没办法重现，不知道是哪里的起了冲突。还是先mark</p>
+
+<p>参考资料:[1]<a href="http://www.positioniseverything.net/explorer/inherited_margin.html">http://www.positioniseverything.net/explorer/inherited_margin.html</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[图片的map锚点]]></title>
+    <link href="http://CoffeeXu.github.io/blog/2014/01/04/images-map"/>
+    <updated>2014-01-04T13:12:00+08:00</updated>
+    <id>http://CoffeeXu.github.io/blog/2014/01/04/images-map</id>
+    <content type="html"><![CDATA[<p>tags: <code>images</code> <code>map</code></p>
+
+<br>
+
+
+<p>闲来无事，回答了<a href="http://www.html-js.com/qa/254#answer-551">前端乱炖</a>的问题，关于给图片设置锚点，详细说是给自适应的图片设置锚点。因为图片是自适应的，那么area的 coords属性值还是固定的话，锚点就要错位了，所以自然就想到能不能设置百分比，可是 coords到底能不能设置百分比啊，好麻烦啊。翻资料查资料看英文看到吐血啊。</p>
+
+<p>呐，dreamweaver设置map锚点太方便啦。讲起来第一次实习，做页面，还是在聚光科技，导师给了我一个流程图的页面，让我第二天给他，项目组的成员需要这个页面拿到外面去演示（这个是我后来才知道的）。流程图你们知道嘛，位置都是不规则的，按现在来做，基本就是绝对定位绝对定位绝对定位。<br>
+我当时还刚实习，算是真正在做的第一个页面，本来IE下坑就多，我做了一个下午也没有弄好，一小块一小块切图，做了个大概。第二天导师问我怎么样了，我说快好了，他一看，才做了一半，而且位置都没有跟设计稿一样，有偏差。不是普通意义上的有偏差，是明显可以看出箭头和框架导航位置歪掉了。<br>
+他说，这样，你这个不要了，重新做，把整个图片切下来，不要像这样一块一块切了，整个图片弄在页面上，头尾还是要的。图片热点你知道的嘛？就用这个把链接接上就好了。<br>
+我愣了下，什么图片热点，我不会啊。学学要多久？我说，啊，是什么东西，好像不会诶。<br>
+他说，你把图片切好，我教你，很简单。<br>
+然后，他把我切好的整张内容区的图片拖到dreamweaver里，下面有个map，他用矩形框，在需要添加链接的图片位置画出了一个矩形，然后把链接地址写上，好了！<br>
+他说，接下来还有这些这些这些，你就这样把链接添加到对应的位置。</p>
+
+<p>我摔！这么简单要做什么网页！<br>
+然后5分钟弄好给他，他匆匆忙忙传给其他成员，然后他们去出差了。<br></p>
+
+<p>好了好了，继续说coords到底能不能设置百分比。<br>
+<a href="http://www.w3.org/TR/html4/struct/objects.html#h-13.6.1">w3c标准</a>这句话——Coordinates are relative to the top, left corner of the object. All values are lengths. All values are separated by commas. <br>
+重点是中间那句话，所有的值都是lengths。<br>
+HTML为元素指定了三种类型的长度值：Pixels，Length，MultiLength。简单来说，Pixels是指阿拉伯数值表示的是像素值，比如‘50’就是指&#8217;50px&#8217;;Length是指，阿拉伯数值可以是像素值，也可以是百分比。MultiLength可以是Length也可以是相对长度值。</p>
+
+<p>既然可以是百分比，就要考虑百分比的基数是谁。100px的10%，和900px的10%相差不要太多哦。那事实上（什么事实？谁说的事实？只是我测了好几种情况的实验结果），这个百分比计算的数值相对的既不是map的大小，也不是area的大小，也不是img图片的大小。不管你们混乱成什么样，coords始终以100为基准（泪流满面的表情）。就好像直接忽略了百分号‘%’。现实和理想的差距吧。</p>
+
+<p>浏览器和浏览器之间也有差异的，有些解释得好， 有些渲染得差。而且我测试的情况也有所局限，基本就用了矩形这种情况，圆和多边形有自己的特殊地方的话我也不知道。那就找出了这么个<a href="http://home.comcast.net/~urbanjost/IMG/resizeimg3.html">网址</a></p>
+
+<p>整个就是这么个过程，看英文真的好痛苦，要不要学好英语的。而且搜出这么多东西有什么意义嘛？哼哼</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[嗨，近来可好？]]></title>
