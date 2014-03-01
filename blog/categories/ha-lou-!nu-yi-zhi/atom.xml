@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 哈喽！女汉纸 | 所以。]]></title>
   <link href="http://CoffeeXu.github.io/blog/categories/ha-lou-!nu-yi-zhi/atom.xml" rel="self"/>
   <link href="http://CoffeeXu.github.io/"/>
-  <updated>2014-03-01T14:06:17+08:00</updated>
+  <updated>2014-03-01T14:43:15+08:00</updated>
   <id>http://CoffeeXu.github.io/</id>
   <author>
     <name><![CDATA[许嘘嘘]]></name>
@@ -12,6 +12,166 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[JavaScript 的核心，闭包和作用域]]></title>
+    <link href="http://CoffeeXu.github.io/blog/2014/02/01/soyouthinkyouknowjavascrip"/>
+    <updated>2014-02-01T14:22:00+08:00</updated>
+    <id>http://CoffeeXu.github.io/blog/2014/02/01/soyouthinkyouknowjavascrip</id>
+    <content type="html"><![CDATA[<p>tags: <code>闭包</code> <code>作用域</code></p>
+
+<br>
+
+
+<p>这篇文章源于<a href="http://e.weibo.com/jobbole?ref=http%3A%2F%2Fweibo.com%2F1581992285%2Fprofile%3Ftopnav%3D1%26wvr%3D5%231354965989570">@伯乐在线官方微博</a>一篇文章,<a href="http://blog.jobbole.com/30468/">测试：你自认为理解了JavaScript？</a>,原文链接这篇文章有给出.主要下面五段小代码.</p>
+
+<p>```javascript</p>
+
+<pre><code>if (!("a" in window)) {
+    var a = 1;
+}
+alert(a);
+</code></pre>
+
+<p><code>
+</code>javascript</p>
+
+<pre><code>var a = 1,
+    b = function a(x) {
+        x &amp;&amp; a(--x);
+    };
+alert(a);
+</code></pre>
+
+<p><code>
+</code>javascript</p>
+
+<pre><code>function a(x) {
+    return x * 2;
+}
+var a;
+alert(a);
+</code></pre>
+
+<p><code>
+</code>javascript</p>
+
+<pre><code>function b(x, y, a) {
+    arguments[2] = 10;
+    alert(a);
+}
+b(1, 2, 3);
+</code></pre>
+
+<p><code>
+</code>javascript</p>
+
+<pre><code>function a() {
+    alert(this);
+}
+a.call(null);
+</code></pre>
+
+<p>```</p>
+
+<p>参考答案(在chrome下弹出的结果,别的木有测试过):</p>
+
+<blockquote><p>undefined,</p>
+
+<p>1,</p>
+
+<p>function a(x) { return x * 2; },</p>
+
+<p>10,</p>
+
+<p>window</p></blockquote>
+
+<h3>下面是我的理解,以及用于理解而参考的一些资料:</h3>
+
+<h4>题目1</h4>
+
+<p>```javascript</p>
+
+<pre><code>if (!("a" in window)) {
+    var a = 1;
+}
+alert(a);
+</code></pre>
+
+<p>```
+1.  变量申明先压入栈,即顶置变量申明.var a = 1;分为变量申明和变量赋值&mdash;var a; a = 1;执行的时候才进行赋值,所以"a" in window为true,没有对a赋值,所以弹出undefined,而非报错.
+2.  我多嘴说一句,if是不区分作用域的.JS中并不是{}区分变量作用范围,而是函数.</p>
+
+<h4>题目2</h4>
+
+<p>```javascript</p>
+
+<pre><code>var a = 1,
+    b = function a(x) {
+        x &amp;&amp; a(--x);
+    };
+alert(a);
+</code></pre>
+
+<p>```
+我认为很简单,a(x)只是一个代号而已,不是变量,所以跟var a = 1一点关系没有,它可以是b(x),c(x).弹出的a始终为1.</p>
+
+<p>如果把b改成a就不一样了.</p>
+
+<h4>题目3</h4>
+
+<p>```javascript</p>
+
+<pre><code>function a(x) {
+    return x * 2;
+}
+var a;
+alert(a);
+</code></pre>
+
+<p>```
+函数申明,然后是变量申明.由于变量没有赋值,那a没有被覆盖.输出的是函数体.JS中变量是随时可以被改变,但这应该局限于执行的时候.</p>
+
+<h4>题目4</h4>
+
+<p>```javascript</p>
+
+<pre><code>function b(x, y, a) {
+    arguments[2] = 10;
+    alert(a);
+}
+b(1, 2, 3);
+</code></pre>
+
+<p>```</p>
+
+<p>arguments[2] = 10;就是改变a了,好像没有什么好解释了.</p>
+
+<h4>题目5</h4>
+
+<p>```javascript</p>
+
+<pre><code>function a() {
+    alert(this);
+}
+a.call(null);
+</code></pre>
+
+<p>```</p>
+
+<p>这个翻译过上一次的<a href="http://coffeexu.github.io/blog/2013/10/15/javascript-function-invocation-patterns">文章</a>,好像也很简单.this指向call函数第一个参数(这里为null).根据ECMAScript262规范规定：如果第一个参数传入的对象调用者是null或者undefined的话，call方法将把全局对象（也就是window）作为this的值.</p>
+
+<p>此处再总结下this.</p>
+
+<ol>
+<li><p>对于obj.fun()此类方法函数调用,哪个<code>对象实例</code>(obj)调用this所在的函数(fun),this指向那个<code>对象实例</code></p></li>
+<li><p>对于函数调用,this指向全局对象.(其实可以看做上一种,是window对象的方法函数,全局对象调用,则指向全局对象)</p></li>
+<li><p>对于构造函数调用,若该函数返回一个简单类型（number, string, boolean, null or undefined），忽略return值，返回this（指向新的对象）;如果该函数返回一个object实例（简单类型以外的任何类型），那么将返回该对象。</p></li>
+<li><p>apply和call调用,this指向apply和call第一参数.即手动设置this的值.</p></li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[IE inherited margin bug: form elements and hasLayout]]></title>
@@ -196,43 +356,6 @@ HTML为元素指定了三种类型的长度值：Pixels，Length，MultiLength�
 
 
 <p>一定要拜读的资料<a href="http://www.w3school.com.cn/css/css_margin_collapsing.asp">w3school-CSS 外边距合并</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[爱整理的都是好姑凉]]></title>
-    <link href="http://CoffeeXu.github.io/blog/2013/10/15/handbook"/>
-    <updated>2013-10-15T20:20:00+08:00</updated>
-    <id>http://CoffeeXu.github.io/blog/2013/10/15/handbook</id>
-    <content type="html"><![CDATA[<p>tags: <code>手册</code></p>
-
-<br>
-
-
-<h3>开始装b</h3>
-
-<p>```</p>
-
-<pre><code>rake new_post["title"]
-rake generate
-rake deploy
-
-git add .
-git commit -m "Some comment here." 
-git push origin source
-</code></pre>
-
-<p>```</p>
-
-<h3>先睹为快</h3>
-
-<p>```</p>
-
-<pre><code>rake preview
-# ctrl + c 退出预览
-</code></pre>
-
-<p>```</p>
 ]]></content>
   </entry>
   

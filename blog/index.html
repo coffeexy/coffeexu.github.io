@@ -136,6 +136,215 @@ $(document).bind('DOMNodeInserted', function(event) {
 	<header>
 		<h2 class="title">
 			
+			<a href="/blog/2014/02/01/soyouthinkyouknowjavascrip">
+			
+				JavaScript 的核心，闭包和作用域</a>
+		</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-01T14:22:00+08:00" pubdate data-updated="true">Feb 1<span>st</span>, 2014</time></div>
+	</header>
+	<div class="entry-content">
+		<p>tags: <code>闭包</code> <code>作用域</code></p>
+
+<br>
+
+
+<p>这篇文章源于<a href="http://e.weibo.com/jobbole?ref=http%3A%2F%2Fweibo.com%2F1581992285%2Fprofile%3Ftopnav%3D1%26wvr%3D5%231354965989570">@伯乐在线官方微博</a>一篇文章,<a href="http://blog.jobbole.com/30468/">测试：你自认为理解了JavaScript？</a>,原文链接这篇文章有给出.主要下面五段小代码.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="s2">&quot;a&quot;</span> <span class="k">in</span> <span class="nb">window</span><span class="p">))</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nx">alert</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">b</span> <span class="o">=</span> <span class="kd">function</span> <span class="nx">a</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">x</span> <span class="o">&amp;&amp;</span> <span class="nx">a</span><span class="p">(</span><span class="o">--</span><span class="nx">x</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">};</span>
+</span><span class='line'><span class="nx">alert</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">a</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nx">x</span> <span class="o">*</span> <span class="mi">2</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">a</span><span class="p">;</span>
+</span><span class='line'><span class="nx">alert</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">b</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">a</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">arguments</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+</span><span class='line'>    <span class="nx">alert</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nx">b</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">a</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">alert</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nx">a</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>参考答案(在chrome下弹出的结果,别的木有测试过):</p>
+
+<blockquote><p>undefined,</p>
+
+<p>1,</p>
+
+<p>function a(x) { return x * 2; },</p>
+
+<p>10,</p>
+
+<p>window</p></blockquote>
+
+<h3>下面是我的理解,以及用于理解而参考的一些资料:</h3>
+
+<h4>题目1</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="s2">&quot;a&quot;</span> <span class="k">in</span> <span class="nb">window</span><span class="p">))</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nx">alert</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>变量申明先压入栈,即顶置变量申明.var a = 1;分为变量申明和变量赋值&mdash;var a; a = 1;执行的时候才进行赋值,所以&#8221;a&#8221; in window为true,没有对a赋值,所以弹出undefined,而非报错.</li>
+<li>我多嘴说一句,if是不区分作用域的.JS中并不是{}区分变量作用范围,而是函数.</li>
+</ol>
+
+
+<h4>题目2</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">b</span> <span class="o">=</span> <span class="kd">function</span> <span class="nx">a</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">x</span> <span class="o">&amp;&amp;</span> <span class="nx">a</span><span class="p">(</span><span class="o">--</span><span class="nx">x</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">};</span>
+</span><span class='line'><span class="nx">alert</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>我认为很简单,a(x)只是一个代号而已,不是变量,所以跟var a = 1一点关系没有,它可以是b(x),c(x).弹出的a始终为1.</p>
+
+<p>如果把b改成a就不一样了.</p>
+
+<h4>题目3</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">a</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nx">x</span> <span class="o">*</span> <span class="mi">2</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">a</span><span class="p">;</span>
+</span><span class='line'><span class="nx">alert</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>函数申明,然后是变量申明.由于变量没有赋值,那a没有被覆盖.输出的是函数体.JS中变量是随时可以被改变,但这应该局限于执行的时候.</p>
+
+<h4>题目4</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">b</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">a</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">arguments</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+</span><span class='line'>    <span class="nx">alert</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nx">b</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>arguments[2] = 10;就是改变a了,好像没有什么好解释了.</p>
+
+<h4>题目5</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">a</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">alert</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nx">a</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这个翻译过上一次的<a href="http://coffeexu.github.io/blog/2013/10/15/javascript-function-invocation-patterns">文章</a>,好像也很简单.this指向call函数第一个参数(这里为null).根据ECMAScript262规范规定：如果第一个参数传入的对象调用者是null或者undefined的话，call方法将把全局对象（也就是window）作为this的值.</p>
+
+<p>此处再总结下this.</p>
+
+<ol>
+<li><p>对于obj.fun()此类方法函数调用,哪个<code>对象实例</code>(obj)调用this所在的函数(fun),this指向那个<code>对象实例</code></p></li>
+<li><p>对于函数调用,this指向全局对象.(其实可以看做上一种,是window对象的方法函数,全局对象调用,则指向全局对象)</p></li>
+<li><p>对于构造函数调用,若该函数返回一个简单类型（number, string, boolean, null or undefined），忽略return值，返回this（指向新的对象）;如果该函数返回一个object实例（简单类型以外的任何类型），那么将返回该对象。</p></li>
+<li><p>apply和call调用,this指向apply和call第一参数.即手动设置this的值.</p></li>
+</ol>
+
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post">
+	<header>
+		<h2 class="title">
+			
 			<a href="/blog/2014/01/04/ie-inherited-margin-bug">
 			
 				IE Inherited Margin Bug: Form Elements and hasLayout</a>
@@ -673,67 +882,6 @@ HTML为元素指定了三种类型的长度值：Pixels，Length，MultiLength�
 <li><p>{position:absolute;top:0;bottom:0;margin:auto}别忘记给父类定位{position:relative;}</p></li>
 </ul>
 
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post">
-	<header>
-		<h2 class="title">
-			
-			<a href="/blog/2013/10/27/just-do-it">
-			
-				去做，才有困难可言</a>
-		</h2>
-		<div class="meta date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-10-27T15:39:00+08:00" pubdate data-updated="true">Oct 27<span>th</span>, 2013</time></div>
-	</header>
-	<div class="entry-content">
-		<p>tags: <code>梦想清单</code></p>
-
-<br>
-
-
-<p>花了十个月，才完成了原来在连客上写下的清单(其实Evernote里还有好多个清单)</p>
-
-<p><img src="/images/blog/20131027.jpg"></p>
-
-<p>好像也不知道做完了有什么意义，也很难感受当时写下这些想要去做的心情。就好像我一直不能理解小时候说长大要当作家的心情是一样一样的。</p>
-
-<h4>买一台MAC</h4>
-
-<p>现在的笔记本是五月底买的，给自己当作六一儿童节的礼物。以前的联想就被丢在家里积灰尘，很多大学时期的东西就跟过气的笔记本一样被闲置。说来也奇怪，明明有时候好像是那么念旧的一个人，很多有用没用的东西总是舍不得丢掉，很多过去的人和事总是有一岔没一岔的想起，但是又会在应该柔软的时候，gin得跟什么一样。像从来没有回访过母校，我也就在每次路过严分的时候，会呵呵下；或者看到工大校庆的各种转发，打个已阅的标签。</p>
-
-<p>其实现在也很少开电脑了，下了班也很少再有心情去码代码。苹果系统感觉还没有用得很顺，所以也没有体会到效率的提高。好吧，压根就没有在码代码，提高毛线啊。</p>
-
-<h4>养一只叫&#8221;萌萌&#8221;的猫</h4>
-
-<p>从别人那里领养来一只小母喵，两三个月大的家猫，黑不溜秋的，被好多人嫌弃，小能一直强调“丑哭了！”，但是我还是觉得挺不错的呀，小喵都挺萌的，不过名字没有叫萌萌，花花小八土豆，都是别人取的，反正现在叫什么她都是不会应和的，一直沉浸在自己的世界里发神经！真的是特别神经。不知道是不是小时候都这样皮，到长大了就好点了吧懒懒的了。我不是很有耐心的人，老是烦我我就会教训她，她就会有点害怕我，但晚上还是会在我门口喵喵地叫，求我放她进来睡觉。可是我多无情的人啊，不管她。小时候还是要教好，不能养成恶习。白天还是开着门让她跑来跑去发神经。教了两次已经会上厕所，表扬一下。</p>
-
-<p>我还是希望可以把她养得胖胖的，周末可以坐在我腿上晒太阳，看我上网矫情。</p>
-
-<p>养猫还是一件麻烦的事情，因为对她做什么她都是不会领情的。我是独立的，她也是独立的。我对她抚摸她根本就没有在享受，我表扬她大概她也感受不到吧。我在想我养她长大，我们彼此会有感情吗？</p>
-
-<h4>去北京，旅行</h4>
-
-<p>呵呵。<a href="/blog/2013/10/23/travel-to-beijing">带着痘痘来北京看人头</a></p>
-
-<p>所以所有这些，都被我当作体验，感受过就好了吧，没什么不同的。</p>
 
 		
 		
