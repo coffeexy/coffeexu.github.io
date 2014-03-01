@@ -140,20 +140,51 @@ HTML为元素指定了三种类型的长度值：Pixels，Length，MultiLength�
  -->
 
 
-    <!-- AddThis Button BEGIN -->
-<!-- <div class="addthis_toolbox addthis_default_style addthis_32x32_style" style="padding:18px 0;margin-top:100px;">
-<a class="addthis_button_sinaweibo"></a>
-<a class="addthis_button_qzone"></a>
-<a class="addthis_button_pocket"></a>
-<a class="addthis_button_evernote"></a>
-<a class="addthis_button_google_plusone_share"></a>
-<a class="addthis_button_facebook"></a>
-<a class="addthis_button_twitter"></a>
-<a class="addthis_button_compact"></a><a class="addthis_counter addthis_bubble_style"></a>
+    <div class="share">
+  <p>觉得还不错</p>
+  <p id="Jso">
+  	分享支持
+    <a id="WeiXinShare" title="分享到微信朋友圈">Wechat`</a>
+    <a title="分享到新浪微博" href="http://service.t.sina.com.cn/share/share.php">Weibo`</a>
+    <a title="分享到腾讯微博" href="http://v.t.qq.com/share/share.php">Qweibo`</a>
+    <a title="分享到QQ空间" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey">Qzone`</a>
+    <a title="分享到豆瓣" href="http://shuo.douban.com/!service/share">Douban`</a>
+  </p>
+  <p>土豪支持<a href="http://me.alipay.com/xy0711">支付宝赞助</a></p>
+  <p>吐槽联系<a href="/about">许乐乐_</a>，但请勿私自转载</p>
 </div>
-<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5258c38b3ec14c1d"></script> -->
-<!-- AddThis Button END -->
+<script type="text/javascript">
+	var title = document.title,
+		url = document.URL,
+		img = document.getElementsByTagName('img'),
+		pic = img.length ? img[0].src : null;
+	$('#Jso a').each(function(){
+		var $this = $(this)
+			href = $this.attr('href');
+		if (href) {
+			if($this.attr('title') == '分享到新浪微博'){
+    			title = document.title + '@许乐乐_ '
+    		} else{
+    			title = document.title;
+    		}
+    		$this.attr('href', href+'?title='+title+'&url='+url+'&pics='+pic);
+		}
+	});
+	$('#WeiXinShare').one("click",function(){
+		if (typeof WeixinJSBridge == "undefined") {
+			var $img = '<div class="weixinCode"><p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p><img src="http://qr.liantu.com/api.php?w=200&m=10&text='+url+'"/></div>';
+			$('.share').append($img);
+		} else{
+		  WeixinJSBridge.invoke('shareTimeline', {
+			"title": title,
+			"link": url,
+			"desc": "许乐乐和她的小伙伴们",
+			"img_url": pic
+		  });
+		}
+	})
+
+</script>
 
 
 
