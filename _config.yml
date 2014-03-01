@@ -85,12 +85,12 @@ delicious_user:
 delicious_count: 3
 
 # Disqus Comments
-disqus_short_name: coffeexu
-disqus_show_comment_count: true
+# disqus_short_name: coffeexu
+# disqus_show_comment_count: true
 
 # duoshuo comments
-duoshuo_comments: true
-duoshuo_short_name: coffeexu
+# duoshuo_comments: true
+# duoshuo_short_name: coffeexu
 
 # weibo
 weibo_share: true
