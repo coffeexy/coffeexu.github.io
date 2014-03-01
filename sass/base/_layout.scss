@@ -11,13 +11,13 @@ body{
 	font-weight: 300;
 	line-height: 1.5;
 	background: $color-background;
-//	@media screen and (max-width: 1040px){
-//		margin: 0 20px;
-//	}
-//	@media screen and (max-width: 600px){
-//		font-size: 16px;
-//		margin: 0 20px;
-//	}
+	@media screen and (max-width: 1040px){
+		margin: 0 20px;
+	}
+	@media screen and (max-width: 600px){
+		font-size: 16px;
+		margin: 0 20px;
+	}
 }
 
 h1{
