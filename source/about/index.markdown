@@ -19,6 +19,7 @@ footer: true
 正在努力挣很多很多的钱。<br>
 正在努力去完成所有自己喜欢的事情。
 
-<br>
-是个神经病，鉴定完毕。
+Contact Me: <coffee.xuy@gmail.com>
+
+<div class="map"><iframe src="https://mapsengine.google.com/map/embed?mid=z9RmubBO57X4.kvGToMAt8en8" width="640" height="480"></iframe></div>
 
