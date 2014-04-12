@@ -6,7 +6,8 @@ footer: true
 --- 
 ###About Me｜许嘘嘘
 
-2013.3-今 上海趣搭网络科技有限公司 前端开发 [3D在线试衣](http://www.3d414.com) <br>
+2014.3-今 无业游民
+2013.3-2014.3 上海趣搭网络科技有限公司 前端开发 [3D在线试衣](http://www.3d414.com) <br>
 2012.2-2012.7 聚光科技有限公司 网页开发实习生<br>
 2009.9-2013.6 浙江工业大学 网络工程
 
@@ -21,5 +22,5 @@ footer: true
 
 Contact Me: <coffee.xuy@gmail.com>
 
-<div class="map"><iframe src="https://mapsengine.google.com/map/embed?mid=z9RmubBO57X4.kvGToMAt8en8" width="640" height="480"></iframe></div>
+<div class="map"><iframe src="https://mapsengine.google.com/map/embed?mid=z9RmubBO57X4.kvGToMAt8en8" width="100%" height="480"></iframe></div>
 
