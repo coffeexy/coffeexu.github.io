@@ -72,7 +72,7 @@
     </url>
     <url>
         <loc>http://CoffeeXu.github.io/about/</loc>
-        <lastmod>2014-03-01T11:44:30+08:00</lastmod>
+        <lastmod>2014-03-11T20:27:08+08:00</lastmod>
     </url>
     <url>
         <loc>http://CoffeeXu.github.io/blog/archives/</loc>
@@ -93,5 +93,9 @@
     <url>
         <loc>http://CoffeeXu.github.io/robots.txt</loc>
         <lastmod>2013-10-10T20:55:30+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://CoffeeXu.github.io/xy/</loc>
+        <lastmod>2014-04-11T21:19:27+08:00</lastmod>
     </url>
 </urlset>
