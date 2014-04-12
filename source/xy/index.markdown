@@ -7,7 +7,7 @@ footer: true
 
 #许泳  XU YONG
 
-本科 女1990.07.11<br>
+本科 女 1990.07.11<br>
 15068848198 <coffee.xuy@gmail.com>
 
 
