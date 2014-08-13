@@ -4,6 +4,17 @@ title: "code"
 date: 2013-10-31 22:32
 footer: true
 ---
+###响应式网站开发（部分）
+*	<http://www.socialsoup.com/>
+*	<http://www.nzwine.com/> 
+*	<https://www.shuroo.com.au/>
+*	<http://www.procover.com.au/>
+*	<http://www.hostsure.com.au/>
+*	<http://hib.com.au/>
+*	<http://www.apollojets.devave.com/>
+*	<http://www.capeyork.devave.com/>
+*	<http://lb.deepdemo.us/>
+
 ###Layout|CSS
 * [扁平化设计块状布局](http://coffeexu.github.io/Code/gird.html)
 * [左右背景各自延伸布局](http://coffeexu.github.io/Code/repeatXY.html)
