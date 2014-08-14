@@ -47,7 +47,7 @@ footer: true
 *	<http://www.procover.com.au/>
 *	<http://www.hostsure.com.au/>
 *	<http://hib.com.au/>
-*	<http://www.apollojets.devave.com/>
+*	<http://aj.vwm.com/>
 *	<http://www.capeyork.devave.com/>
 *	<http://lb.deepdemo.us/>
 
